@@ -1,13 +1,33 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store/pokemonStore';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+import './index.css';
+import 'react-redux-toastr/src/styles/index.scss';
+
+render(
+  <Provider store={store}>
+    <>
+      <Router>
+        <App />
+      </Router>
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates={false}
+        position="top-right"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar
+        closeOnToastrClick
+      />
+    </>
+  </Provider>,
   document.getElementById('root')
 );
 
